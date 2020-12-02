@@ -33,3 +33,6 @@ class AttachmentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Attachment
         fields = ['name', 'image', 'test_result']
+
+
+
