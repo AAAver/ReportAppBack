@@ -23,15 +23,15 @@ class TestResult(models.Model):
     status = models.CharField(max_length=20)
     method_name = models.CharField(max_length=200)
     severity = models.CharField(max_length=20, blank=True, null=True)
-    parameters = models.TextField(max_length=2000, blank=True, null=True)
-    steps = models.TextField(max_length=2000, blank=True, null=True)
+    parameters = models.JSONField(max_length=2000, blank=True, null=True)
+    steps = models.JSONField(max_length=2000, blank=True, null=True)
     description = models.TextField(max_length=2000, blank=True, null=True)
-    start = models.IntegerField(blank=True, null=True)
-    stop = models.IntegerField(blank=True, null=True)
+    start = models.BigIntegerField(blank=True, null=True)
+    stop = models.BigIntegerField(blank=True, null=True)
     uuid = models.UUIDField(blank=True, null=True)
     history_id = models.UUIDField(blank=True, null=True)
     test_case_id = models.UUIDField(blank=True, null=True)
-    labels = models.TextField(max_length=2000, blank=True)
+    labels = models.JSONField(max_length=2000, blank=True)
 
     def __str__(self):
         return f"{self.run.project.project_name} {self.run.name} {self.title}"

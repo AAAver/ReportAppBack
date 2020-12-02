@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication
 
 from .models import Project, Run, TestResult, Attachment
 from .serializers import ProjectSerializer, RunSerializer, TestResultSerializer
@@ -21,7 +22,14 @@ def HomePage(request):
     return render(request, 'ReportApp/homepage.html', context)
 
 
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return  # To not perform the csrf check previously happening
+
+
 class ProjectViewSet(viewsets.ModelViewSet):
+    authentication_classes = (CsrfExemptSessionAuthentication, )
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
