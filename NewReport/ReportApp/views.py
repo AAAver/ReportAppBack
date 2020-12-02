@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import SessionAuthentication
 
 from .models import Project, Run, TestResult, Attachment
-from .serializers import ProjectSerializer, RunSerializer, TestResultSerializer
+from .serializers import ProjectSerializer, RunSerializer, TestResultSerializer, AttachmentSerializer
 
 
 def HomePage(request):
@@ -29,7 +29,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    authentication_classes = (CsrfExemptSessionAuthentication, )
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
@@ -38,6 +38,12 @@ class RunViewSet(viewsets.ModelViewSet):
     queryset = Run.objects.all()
     serializer_class = RunSerializer
     filterset_fields = ('project_id',)
+
+
+class AttachmentViewSet(viewsets.ModelViewSet):
+    queryset = Attachment.objects.all()
+    serializer_class = AttachmentSerializer
+    filterset_fields = ('test_result_id',)
 
 
 class TestResultViewSet(viewsets.ModelViewSet):

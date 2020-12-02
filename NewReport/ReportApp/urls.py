@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'project', views.ProjectViewSet)
 router.register(r'run', views.RunViewSet)
 router.register(r'test_results', views.TestResultViewSet)
+router.register(r'attachments', views.AttachmentViewSet)
 
 
 urlpatterns = [
